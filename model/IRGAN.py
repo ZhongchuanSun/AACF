@@ -182,7 +182,7 @@ class IRGAN(AbstractRecommender):
         self.batch_ratings = tf.matmul(batch_u_embeddings, items_embeddings, transpose_b=True) + items_biases
         self.batch_users_prob = tf.nn.softmax(self.batch_ratings / self.tau_hd, axis=-1)
 
-    @timer
+    # @timer
     def get_train_data(self):
         users = DataIterator(list(self.user_pos_train.keys()), batch_size=1024, shuffle=False, drop_last=False)
         all_user_list, all_item_list, labels_list = [], [], []
@@ -227,7 +227,7 @@ class IRGAN(AbstractRecommender):
                 result = self.evaluate_model()
                 self.logger.info("%d_%d:\t%s" % (epoch, g_epoch, result))
 
-    @timer
+    # @timer
     def training_discriminator(self, data_iterator):
         for users, items, labels in data_iterator:
             feed = {self.discriminator.u: users,
@@ -235,7 +235,7 @@ class IRGAN(AbstractRecommender):
                     self.discriminator.label: labels}
             self.sess.run(self.discriminator.d_updates, feed_dict=feed)
 
-    @timer
+    # @timer
     def training_generator(self):
         for user, pos in self.user_pos_train.items():
             sample_lambda = 0.2

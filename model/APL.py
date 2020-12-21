@@ -149,14 +149,14 @@ class APL(AbstractRecommender):
             result = self.evaluate_model()
             self.logger.info("%d:\t%s" % (epoch, result))
 
-    @timer
+    # @timer
     def training_critic(self, dataloader):
         for input_user, pos_items in dataloader:
             feed = {self.user_holder: input_user,
                     self.item_holder: pos_items}
             self.sess.run(self.critic_update, feed_dict=feed)
 
-    @timer
+    # @timer
     def training_generator(self, dataloader):
         for input_user, pos_items in dataloader:
             p_aux = np.zeros([len(pos_items), self.items_num])

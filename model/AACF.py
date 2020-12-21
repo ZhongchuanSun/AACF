@@ -191,7 +191,7 @@ class AACF(AbstractRecommender):
             result = self.evaluate_model()
             self.logger.info("epoch %d:\t%s" % (epoch, result))
 
-    @timer
+    # @timer
     def training_critic(self, dataloader):
         for users, pos_items, att_items in dataloader:
             feed = {self.user_hd: users,
@@ -200,7 +200,7 @@ class AACF(AbstractRecommender):
                     }
             self.sess.run(self.critic_update, feed_dict=feed)
 
-    @timer
+    # @timer
     def training_generator(self, dataloader):
         for users, pos_items, att_items in dataloader:
             feed = {self.user_hd: users,
@@ -214,7 +214,7 @@ class AACF(AbstractRecommender):
                                   batch_size=self.batch_size, shuffle=True)
         return dataloader
 
-    @timer
+    # @timer
     def get_att_items(self, att_num, top_k=200):
         all_att_items = []
         user_iter = DataIterator(self.user_ids, batch_size=1024, shuffle=False, drop_last=False)
