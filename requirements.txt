@@ -1,0 +1,6 @@
+tensorflow-gpu==1.14.0
+reckit==0.2.4
+numpy==1.19.1
+scipy==1.5.2
+pandas==1.0.5
+cython=0.29.21
